@@ -1,0 +1,48 @@
+    // ─── MENÚ HAMBURGER (celular) ───
+    document.getElementById('menuBtn').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // ─── SCROLL REVEAL ───
+    const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        }
+    });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ─── FORMULARIO → WHATSAPP ───
+    function enviarWhatsApp() {
+    const nombre   = document.getElementById('nombre').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const moto     = document.getElementById('moto').value.trim();
+    const servicio = document.getElementById('servicio').value;
+    const mensaje  = document.getElementById('mensaje').value.trim();
+
+    if (!nombre || !servicio) {
+        alert('Por favor completa al menos tu nombre y el servicio.');
+        return;
+    }
+
+    const texto = [
+        '🏍️ Quiero reservar una cita:',
+        '👤 Nombre: ' + nombre,
+        '📱 Tel: ' + (telefono || 'no indicado'),
+        '🏍️ Moto: ' + (moto || 'no indicado'),
+        '🔧 Servicio: ' + servicio,
+        '📝 Mensaje: ' + (mensaje || 'ninguno')
+    ].join('\n');
+
+    // Abrimos directo con la app nativa, no WhatsApp Web
+    const url = 'whatsapp://send?phone=51931303289&text=' + encodeURIComponent(texto);
+    const urlWeb = 'https://wa.me/51931303289?text=' + encodeURIComponent(texto);
+
+    // Intenta abrir la app, si no funciona usa el web
+    window.location = url;
+    setTimeout(() => {
+        window.open(urlWeb, '_blank');
+    }, 1500);
+    }
