@@ -36,8 +36,11 @@
         '📝 Mensaje: ' + (mensaje || 'ninguno')
     ].join('\n');
 
+    // Abrimos directo con la app nativa, no WhatsApp Web
     const url = 'whatsapp://send?phone=51929519634&text=' + encodeURIComponent(texto);
     const urlWeb = 'https://wa.me/51929519634?text=' + encodeURIComponent(texto);
+
+    // Intenta abrir la app, si no funciona usa el web
     window.location = url;
     setTimeout(() => {
         window.open(urlWeb, '_blank');
