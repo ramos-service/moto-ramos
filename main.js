@@ -36,13 +36,18 @@
         '📝 Mensaje: ' + (mensaje || 'ninguno')
     ].join('\n');
 
-    // Abrimos directo con la app nativa, no WhatsApp Web
-    const url = 'whatsapp://send?phone=51931303289&text=' + encodeURIComponent(texto);
-    const urlWeb = 'https://wa.me/51931303289?text=' + encodeURIComponent(texto);
-
-    // Intenta abrir la app, si no funciona usa el web
+    const url = 'whatsapp://send?phone=51929519634&text=' + encodeURIComponent(texto);
+    const urlWeb = 'https://wa.me/51929519634?text=' + encodeURIComponent(texto);
     window.location = url;
     setTimeout(() => {
         window.open(urlWeb, '_blank');
     }, 1500);
+    }
+    // ─── LIGHTBOX ───
+    function abrirFoto(src) {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
+    overlay.innerHTML = `<img src="${src}" style="max-width:90%;max-height:90vh;border-radius:4px;"/>`;
+    overlay.onclick = () => overlay.remove();
+    document.body.appendChild(overlay);
     }
